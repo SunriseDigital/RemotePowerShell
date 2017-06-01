@@ -1,30 +1,43 @@
-function Get-RPSServer {
-    [CmdletBinding()]
-    param (
-        [parameter(Mandatory=$false)]
-        [string]$name,
-
-        [parameter(Mandatory=$false)]
-        [string]$ip
-    )
-    PROCESS {
-      $servers = $(
-        @{pwd = "AdministratorPasswaord"; ip = "ServerIPAddress"; name = "NameToIdentify";}
-      )
-
-      # If there is no argument, display the whole list.
-      if($name -eq "" -and $ip -eq ""){
-        return $servers | %{"$($_.ip)`t$($_.pwd)`t$($_.name)"}
-      }
-
-      # Search by name.
-      if($name -ne ""){
-        return $servers | ?{$_.name -like $name}
-      }
-
-      # Seach by ip address.
-      if($ip -ne ""){
-        return $servers | ?{$_.ip -like $ip}
-      }
+Add-Type -Language CSharp @"
+public class RPSServer{
+    public string AdminPassword {get; private set;}
+    public string Host {get; private set;}
+    public string Name {get; private set;}
+    public RPSServer(string pwd, string host, string name)
+    {
+      AdminPassword = pwd;
+      Host = host;
+      Name = name;
     }
+}
+"@;
+
+function Get-RPSServer {
+  [CmdletBinding()]
+  param (
+      [parameter(Mandatory=$false)]
+      [string]$name,
+
+      [parameter(Mandatory=$false)]
+      [string]$hostAddress
+  )
+  PROCESS {
+    $servers = $(
+      (new-object RPSServer "Administrator password", "Host address", "Name to identify")
+    )
+    # If there is no argument, display the whole list.
+    if($name -eq "" -and $hostAddress -eq ""){
+      return $servers
+    }
+
+    # Search by name.
+    if($name -ne ""){
+      return $servers | ?{$_.Name -like $name}
+    }
+
+    # Seach by ip address.
+    if($hostAddress -ne ""){
+      return $servers | ?{$_.Host -like $hostAddress}
+    }
+  }
 }
