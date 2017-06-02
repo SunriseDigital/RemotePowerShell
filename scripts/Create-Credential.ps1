@@ -2,7 +2,7 @@ function Create-Credential{
   [CmdletBinding()]
   param (
     [parameter(Mandatory=$true,ValueFromPipeline=$true)]
-    [RPSServer]$Server
+    [RPS.Server]$Server
   )
   PROCESS {
     $username = $Server.User

@@ -2,7 +2,7 @@ function Connect-RPS{
   [CmdletBinding()]
   param (
     [parameter(Mandatory=$true,ValueFromPipeline=$true)]
-    [RPSServer]$Server
+    [RPS.Server]$Server
   )
   PROCESS {
     # Connect to server

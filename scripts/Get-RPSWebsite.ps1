@@ -2,7 +2,7 @@ function Get-RPSWebsite{
   [CmdletBinding()]
   param (
     [parameter(Mandatory=$true,ValueFromPipeline=$true)]
-    [RPSServer]$Server,
+    [RPS.Server]$Server,
 
     [parameter(Mandatory=$false,Position=0)]
     [string]$Name
@@ -21,7 +21,7 @@ function Get-RPSWebsite{
 
       Invoke-Expression -Command $command
     } -argumentlist $Server, $Name | %{
-      return new-object RPSResult $Server, $_
+      return new-object RPS.Result $Server, $_
     }
   }
 }
