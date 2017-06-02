@@ -8,10 +8,7 @@ function Get-RPSWebsite{
     [string]$Name
   )
   PROCESS {
-    $username = $Server.User
-    $pass = ConvertTo-SecureString -AsPlainText $Server.Password -Force
-    $cred = New-Object System.Management.Automation.PSCredential -ArgumentList $username,$pass
-
+    $cred = Create-Credential $Server
     Invoke-Command -ComputerName $Server.Address -Credential $cred -ScriptBlock {
       $Server = $args[0]
       $Name = $args[1]
