@@ -1,7 +1,7 @@
 function Get-RPSServer {
   [CmdletBinding()]
   param (
-      [parameter(Mandatory=$false, Position=0)]
+      [parameter(Mandatory=$false,Position=0)]
       [string]$Name,
 
       [parameter(Mandatory=$false)]
