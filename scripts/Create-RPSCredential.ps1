@@ -1,4 +1,4 @@
-function Create-Credential{
+function Create-RPSCredential{
   [CmdletBinding()]
   param (
     [parameter(Mandatory=$true,ValueFromPipeline=$true)]

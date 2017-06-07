@@ -16,12 +16,19 @@ namespace RPS
   }
 
   public class Result{
+    public string ServerName {get; private set;}
+
+    //Please set a human friendly name at the dump display.
+    public string Name {get; private set;}
+
     public Server Server {get; private set;}
     public dynamic Value {get; private set;}
-    public Result(Server server, dynamic value)
+    public Result(Server server, dynamic value, string name)
     {
       Server = server;
       Value = value;
+      Name = name;
+      ServerName = Server.Name;
     }
   }
 }

@@ -7,7 +7,7 @@ function Connect-RPS{
   PROCESS {
     # Connect to server
     Write-Host "Connect to $($Server.Address) [$($Server.Name)]"
-    $cred = Create-Credential $Server
+    $cred = Create-RPSCredential $Server
     Enter-PSSession -ComputerName $Server.Address -Credential $cred
   }
 }
