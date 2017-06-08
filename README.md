@@ -13,7 +13,7 @@ test-path $profile
 If the result is False, create a $profile file with the following command.
 
 ```ps1
-If the result is False, create a $ profile file with the following command.
+new-item -path $profile -itemtype file -force
 ```
 
 You can check the path of the $ profile file with `$profile`.
