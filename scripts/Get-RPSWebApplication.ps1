@@ -15,9 +15,11 @@ function Get-RPSWebApplication{
   PROCESS {
     if( $pipe.GetType() -eq [RPS.Server]){
       $Server = $pipe
-    } else {
+    } elseif($pipe.GetType() -eq [RPS.Result]){
       $Server = $pipe.Server
       $Site = $pipe.Value.name
+    } else {
+      throw new Exception("The value from pipeline must be RPS.Server or RPS.Result")
     }
 
     $cred = Create-RPSCredential $Server
