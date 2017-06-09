@@ -30,7 +30,7 @@ function Get-RPSWebApplication{
       $command = "Get-WebApplication -Site ""$Site"""
 
       if($Name -ne ""){
-        $command += " -Name $Name"
+        $command += " -Name ""$Name"""
       }
 
       Invoke-Expression -Command $command
