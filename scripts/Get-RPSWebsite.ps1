@@ -10,8 +10,7 @@ function Get-RPSWebsite{
   PROCESS {
     $cred = Create-RPSCredential $Server
     Invoke-Command -ComputerName $Server.Address -Credential $cred -ScriptBlock {
-      $Server = $args[0]
-      $Name = $args[1]
+      $Name = $args[0]
 
       $command = "Get-Website"
 
@@ -20,7 +19,7 @@ function Get-RPSWebsite{
       }
 
       Invoke-Expression -Command $command
-    } -argumentlist $Server, $Name | %{
+    } -argumentlist $Name | %{
       return new-object RPS.Result $Server, $_, $_.name
     }
   }
