@@ -25,6 +25,14 @@ namespace RPS
 
     public Server Server {get; private set;}
     public object Value {get; private set;}
+    //Short hand for filter
+    public object v
+    {
+      get
+      {
+        return Value;
+      }
+    }
     public Result(Server server, object value, string name)
     {
       Server = server;
@@ -60,3 +68,5 @@ namespace RPS
   }
 }
 "@;
+
+Update-FormatData "${PSScriptRoot}\format.ps1xml"
