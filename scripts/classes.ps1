@@ -1,7 +1,8 @@
 Add-Type -Language CSharp @"
 namespace RPS
 {
-  public class Server{
+  public class Server
+  {
     public string User {get; private set;}
     public string Password {get; private set;}
     public string Address {get; private set;}
@@ -15,21 +16,47 @@ namespace RPS
     }
   }
 
-  public class Result{
+  public class Result
+  {
     public string ServerName {get; private set;}
 
     //Please set a human friendly name at the dump display.
     public string Name {get; private set;}
 
     public Server Server {get; private set;}
-    public dynamic Value {get; private set;}
-    public Result(Server server, dynamic value, string name)
+    public object Value {get; private set;}
+    public Result(Server server, object value, string name)
     {
       Server = server;
       Value = value;
       Name = name;
       ServerName = Server.Name;
     }
+  }
+
+  public class Website : Result
+  {
+    public Website(Server server, object value, string name): base(server, value, name){}
+  }
+
+  public class WebApplication : Result
+  {
+    public WebApplication(Server server, object value, string name): base(server, value, name){}
+  }
+
+  public class WebAppPool : Result
+  {
+    public WebAppPool(Server server, object value, string name): base(server, value, name){}
+  }
+
+  public class FirewallPortFilter : Result
+  {
+    public FirewallPortFilter(Server server, object value, string name): base(server, value, name){}
+  }
+
+  public class FirewallRule : Result
+  {
+    public FirewallRule(Server server, object value, string name): base(server, value, name){}
   }
 }
 "@;

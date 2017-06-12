@@ -2,19 +2,16 @@ function Restart-RPSWebAppPool{
   [CmdletBinding()]
   param (
     [parameter(Mandatory=$true,ValueFromPipeline=$true)]
-    [RPS.Result] $Result,
-
-    [parameter(Mandatory=$false,Position=0)]
-    [string]$Name
+    [RPS.WebAppPool] $WebAppPool
   )
   PROCESS {
-    $cred = Create-RPSCredential $Result.Server
-    Invoke-Command -ComputerName $Result.Server.Address -Credential $cred -ScriptBlock {
+    $cred = Create-RPSCredential $WebAppPool.Server
+    Invoke-Command -ComputerName $WebAppPool.Server.Address -Credential $cred -ScriptBlock {
       $name = $args[0]
       $serverName = $args[1]
-      
+
       Restart-WebAppPool -Name $name
       Write-Host "Restarted application pool ${name} on ${serverName}"
-    } -argumentlist $Result.Name, $Result.Server.Name
+    } -argumentlist $WebAppPool.Name, $WebAppPool.Server.Name
   }
 }

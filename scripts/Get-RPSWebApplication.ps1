@@ -1,41 +1,32 @@
 function Get-RPSWebApplication{
   [CmdletBinding()]
   param (
-    [parameter(Mandatory=$true,ValueFromPipeline=$true)]
-    $pipe,
+    [parameter(Mandatory=$false,ValueFromPipeline=$true)]
+    [RPS.Server]$Server,
 
-    [parameter(Mandatory=$false,Position=0)]
-    [string]$Name,
-
-    [parameter(Mandatory=$false)]
-    [string]$Site
-
-
+    [parameter(Mandatory=$false,ValueFromPipeline=$true)]
+    [RPS.Website]$Site
   )
   PROCESS {
-    if( $pipe.GetType() -eq [RPS.Server]){
-      $Server = $pipe
-    } elseif($pipe.GetType() -eq [RPS.Result]){
-      $Server = $pipe.Server
-      $Site = $pipe.Value.name
-    } else {
-      throw new Exception("The value from pipeline must be RPS.Server or RPS.Result")
+    if($Server -eq $null){
+      $Server = $Site.Server
+    }
+
+    if($Server -eq $null){
+      throw new Exception("Missing Server data.")
     }
 
     $cred = Create-RPSCredential $Server
     Invoke-Command -ComputerName $Server.Address -Credential $cred -ScriptBlock {
       $Site = $args[0]
-      $Name = $args[1]
-
-      $command = "Get-WebApplication -Site ""$Site"""
-
-      if($Name -ne ""){
-        $command += " -Name ""$Name"""
+      if($Site -eq $null){
+        return Get-WebApplication
+      } else {
+        $command = "Get-WebApplication -Site ""$($Site.name)"""
+        return Invoke-Expression -Command $command
       }
-
-      Invoke-Expression -Command $command
-    } -argumentlist $Site, $Name | %{
-      return new-object RPS.Result $Server, $_, "${Site} $($_.path)"
+    } -argumentlist $Site.Value | %{
+      return new-object RPS.WebApplication $Server, $_, "$($Site.name) $($_.path)"
     }
   }
 }

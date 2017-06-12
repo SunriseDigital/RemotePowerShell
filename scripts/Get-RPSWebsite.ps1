@@ -20,7 +20,7 @@ function Get-RPSWebsite{
 
       Invoke-Expression -Command $command
     } -argumentlist $Name | %{
-      return new-object RPS.Result $Server, $_, $_.name
+      return new-object RPS.Website $Server, $_, $_.name
     }
   }
 }
