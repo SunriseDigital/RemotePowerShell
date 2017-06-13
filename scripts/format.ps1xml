@@ -9,12 +9,15 @@
         <TableHeaders>
           <TableColumnHeader>
             <Label>Server</Label>
+            <Width>16</Width>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>Type</Label>
+            <Width>24</Width>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>Name</Label>
+            <Width>64</Width>
           </TableColumnHeader>
         </TableHeaders>
         <TableRowEntries>
