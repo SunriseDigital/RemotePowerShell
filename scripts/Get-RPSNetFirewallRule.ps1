@@ -1,30 +1,23 @@
 function Get-RPSNetFirewallRule{
   [CmdletBinding()]
   param (
-    [parameter(Mandatory=$false,ValueFromPipeline=$true)]
+    [parameter(Mandatory=$true,ValueFromPipeline=$true)]
     [RPS.Server]$Server,
 
-    [parameter(Mandatory=$false,ValueFromPipeline=$true)]
-    [RPS.FirewallPortFilter]$Port
+    [parameter(Mandatory=$false,Position=0)]
+    [Scriptblock]$PortFilter
   )
   PROCESS {
-    if($Server -eq $null){
-      $Server = $Port.Server
-    }
-
-    if($Server -eq $null){
-      throw new Exception("Missing Server data.")
-    }
-
     $cred = Create-RPSCredential $Server
     Invoke-Command -ComputerName $Server.Address -Credential $cred -ScriptBlock {
-      $Port = $args[0]
-      if($Port -eq $null){
-        Get-NetFirewallRule
-      } else {
-        $Port | Get-NetFirewallRule
+      $PortFilter = {$true}
+      if($args[0] -ne $null){
+        $PortFilter = [Scriptblock]::Create($args[0])
       }
-    } -argumentlist $Port.Value | %{
+
+      Get-NetFirewallPortFilter | ? {$PortFilter.Invoke($_)} | Get-NetFirewallRule
+
+    } -argumentlist $PortFilter | %{
       return new-object RPS.FirewallRule $Server, $_, "$($_.DisplayName)"
     }
   }
