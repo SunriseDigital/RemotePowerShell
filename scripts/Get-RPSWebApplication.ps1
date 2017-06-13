@@ -20,10 +20,9 @@ function Get-RPSWebApplication{
     Invoke-Command -ComputerName $Server.Address -Credential $cred -ScriptBlock {
       $Site = $args[0]
       if($Site -eq $null){
-        return Get-WebApplication
+        Get-WebApplication
       } else {
-        $command = "Get-WebApplication -Site ""$($Site.name)"""
-        return Invoke-Expression -Command $command
+        Invoke-Expression -Command "Get-WebApplication -Site ""$($Site.name)"""
       }
     } -argumentlist $Site.Value | %{
       return new-object RPS.WebApplication $Server, $_, "$($Site.name) $($_.path)"
