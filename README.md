@@ -109,7 +109,6 @@ Get-Help Get-RPSServer -full
 ```
 
 * Copy-RPSWebsite
-* Create-RPSCredential
 * Enter-RPSSession
 * Format-RPSList
 * Get-RPSNetFirewallAddressFilter
@@ -120,5 +119,7 @@ Get-Help Get-RPSServer -full
 * Get-RPSWebApplication
 * Get-RPSWebAppPool
 * Get-RPSWebsite
+* New-RPSNetFirewallRule
+* Remove-RPSNetFirewallRule
 * Restart-RPSWebAppPool
 * Set-RPSNetFirewallRule
