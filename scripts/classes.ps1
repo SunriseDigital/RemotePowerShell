@@ -57,14 +57,24 @@ namespace RPS
     public WebAppPool(Server server, object value, string name): base(server, value, name){}
   }
 
+  public class FirewallRule : Result
+  {
+    public FirewallRule(Server server, object value, string name): base(server, value, name){}
+  }
+
   public class FirewallPortFilter : Result
   {
     public FirewallPortFilter(Server server, object value, string name): base(server, value, name){}
   }
 
-  public class FirewallRule : Result
+  public class FirewallAddressFilter : Result
   {
-    public FirewallRule(Server server, object value, string name): base(server, value, name){}
+    public FirewallAddressFilter(Server server, object value, string name): base(server, value, name){}
+  }
+
+  public class FirewallApplicationFilter : Result
+  {
+    public FirewallApplicationFilter(Server server, object value, string name): base(server, value, name){}
   }
 }
 "@;

@@ -13,7 +13,7 @@
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>Type</Label>
-            <Width>24</Width>
+            <Width>28</Width>
           </TableColumnHeader>
           <TableColumnHeader>
             <Label>Name</Label>
