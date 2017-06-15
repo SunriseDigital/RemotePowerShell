@@ -5,32 +5,20 @@ function Set-RPSNetFirewallRule{
     [RPS.FirewallRule]$Rule,
 
     [parameter(ValueFromRemainingArguments=$true)]
-    $AllArgs
+    [object[]]$Arguments
   )
   PROCESS {
+    $StrArguments = Build-RPSArguments $Arguments
     $cred = Create-RPSCredential $Rule.Server
     Invoke-Command -ComputerName $Rule.Server.Address -Credential $cred -ScriptBlock {
       $Rule = $args[0]
-      $AllArgs = $args[1]
+      $StrArguments = $args[1]
 
-      $command = "Set-NetFirewallRule -Name ""$($Rule.Name)"""
-
-      for ($i = 0; $i -lt $AllArgs.count; $i+=2){
-        $key = $AllArgs[$i]
-        $value = $AllArgs[$i+1]
-        if($value -is [System.Collections.ArrayList]){
-          $value = $value | %{"""${_}"""}
-          $value = $($value -join ",")
-        } else {
-          $value = $value | %{"""${value}"""}
-        }
-
-        $command += " ${key} ${value}"
-      }
+      $command = "Set-NetFirewallRule -Name ""$($Rule.Name)""${StrArguments}"
 
       Write-Host $command
       Invoke-Expression -Command $command
 
-    } -argumentlist $Rule.Value, $AllArgs
+    } -argumentlist $Rule.Value, $StrArguments
   }
 }
