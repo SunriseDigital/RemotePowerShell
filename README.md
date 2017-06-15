@@ -42,7 +42,7 @@ Get-ChildItem "C:\path\to\RemotePowerShell\dir\scripts\*.ps1" | %{.$_}
 
 If you want to reload, you can restart the shell or with `. $profile`.
 
-### Prepare server settings
+### Server settings
 
 First, copy `include \ servers.ps1.tpl` and change the name to `servers.ps1`.
 
