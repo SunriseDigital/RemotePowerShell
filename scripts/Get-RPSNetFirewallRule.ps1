@@ -1,3 +1,19 @@
+<#
+.Synopsis
+  Get-NetNetFirewallRule
+.Parameter Server
+  Target server
+.Parameter PortFilter
+  Port filter.
+.Parameter ApplicationFilter
+  Application filter.
+.EXAMPLE
+  Get-RPSServer test | Get-RPSNetFirewallRule
+.EXAMPLE
+  Get-RPSServer test | Get-RPSNetFirewallRule {$_.LocalPort -eq 123}
+.EXAMPLE
+  Get-RPSServer test | Get-RPSNetFirewallRule -ApplicationFilter {$_.Program -like "*jenkins*"}
+#>
 function Get-RPSNetFirewallRule{
   [CmdletBinding()]
   param (

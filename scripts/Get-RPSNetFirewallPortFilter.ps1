@@ -1,3 +1,15 @@
+<#
+.Synopsis
+  Get-NetFirewallPortFilter
+.Parameter Server
+  Target server
+.Parameter Rule
+  Target firewall rule. Standard output of Get-RPSNetFirewallRule.
+.EXAMPLE
+  Get-RPSServer test | Get-RPSNetFirewallPortFilter
+.EXAMPLE
+  Get-RPSServer test | Get-RPSNetFirewallRule | Get-RPSNetFirewallPortFilter
+#>
 function Get-RPSNetFirewallPortFilter{
   [CmdletBinding()]
   param (

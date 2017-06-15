@@ -1,3 +1,15 @@
+<#
+.Synopsis
+  Get-NetFirewallAddressFilter
+.Parameter Server
+  Target server
+.Parameter Rule
+  Target firewall rule. Standard output of Get-RPSNetFirewallRule.
+.EXAMPLE
+  Get-RPSServer test | Get-RPSNetFirewallAddressFilter
+.EXAMPLE
+  Get-RPSServer test | Get-RPSNetFirewallRule | Get-RPSNetFirewallAddressFilter
+#>
 function Get-RPSNetFirewallAddressFilter{
   [CmdletBinding()]
   param (

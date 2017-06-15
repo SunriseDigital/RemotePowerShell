@@ -1,4 +1,12 @@
-function Connect-RPS{
+<#
+.Synopsis
+  Enter remote PowerShell session.
+.Parameter Server
+  Target server
+.EXAMPLE
+  Get-RPSServer test | Enter-RPSSession
+#>
+function Enter-RPSSession{
   [CmdletBinding()]
   param (
     [parameter(Mandatory=$true,ValueFromPipeline=$true)]

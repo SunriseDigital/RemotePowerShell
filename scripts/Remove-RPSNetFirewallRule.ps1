@@ -1,3 +1,11 @@
+<#
+.Synopsis
+  Remove-NetFirewallRule
+.Parameter Server
+  Target server
+.EXAMPLE
+  Get-RPSServer test | Get-RPSNetFirewallRule　{$_.LocalPort -eq 123} | Remove-NetFirewallRule
+#>
 function Remove-RPSNetFirewallRule{
   [CmdletBinding()]
   param (

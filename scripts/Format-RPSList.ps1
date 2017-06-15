@@ -1,3 +1,11 @@
+<#
+.Synopsis
+  Format-List for RPSResult.
+.Parameter Result
+  Target server
+.EXAMPLE
+  Get-RPSServer test | Get-RPSWebsite | Format-RPSList *
+#>
 function Format-RPSList{
   [CmdletBinding()]
   param (

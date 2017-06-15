@@ -1,3 +1,11 @@
+<#
+.Synopsis
+  Set-NetFirewallRule
+.Parameter Rule
+  Target firewall rule. Standard output of Get-RPSNetFirewallRule.
+.EXAMPLE
+  Get-RPSServer test | Get-Website
+#>
 function Set-RPSNetFirewallRule{
   [CmdletBinding()]
   param (

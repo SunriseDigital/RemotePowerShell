@@ -1,3 +1,11 @@
+<#
+.Synopsis
+  Get Web application pool.
+.Parameter Server
+  Target server
+.EXAMPLE
+  Get-RPSServer test | Get-RPSWebAppPool
+#>
 function Get-RPSWebAppPool{
   [CmdletBinding()]
   param (

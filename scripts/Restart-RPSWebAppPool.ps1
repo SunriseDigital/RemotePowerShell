@@ -1,3 +1,11 @@
+<#
+.Synopsis
+  Restart-RPSWebAppPool
+.Parameter WebAppPool
+  Target web application pool. Standard output of Get-RPSWebAppPool.
+.EXAMPLE
+  Get-RPSServer test | Get-Website
+#>
 function Restart-RPSWebAppPool{
   [CmdletBinding()]
   param (

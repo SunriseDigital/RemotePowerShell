@@ -1,3 +1,21 @@
+<#
+.Synopsis
+  Enumerate servers set to `include \ servers.ps1`. If you pass the target server from this cmdlet to another cmdlet with a pipe, it will execute the processing on that server.
+.Parameter Name
+  Filter by name.
+.Parameter Address
+  Filter by address.
+.Parameter RegexName
+  Filter by name. You can use regular expression
+.Parameter RegexAddress
+  Filter by address. You can use regular expression
+.EXAMPLE
+  Get-RPSServer
+  Display a list of servers set to `include\servers.ps1`.
+.EXAMPLE
+  Get-RPSServer test | Enter-RPSSession
+  Open the remote PowerShell session of the target server.
+#>
 function Get-RPSServer {
   [CmdletBinding()]
   param (
@@ -7,13 +25,19 @@ function Get-RPSServer {
       [parameter(Mandatory=$false)]
       [string]$Address,
 
-      [switch]$Regex
+      [parameter(Mandatory=$false)]
+      [string]$RegexName,
+
+      [parameter(Mandatory=$false)]
+      [string]$RegexAddress
   )
   PROCESS {
     . "$PSScriptRoot\\include\\servers.ps1"
 
     return $servers `
-      | ?{ if($Name -eq "") { $True } else { if( $Regex ) { $_.Name -match $Name } else { $_.Name -like $Name } } } `
-      | ?{ if($Address -eq "") { $True } else { if( $Regex ) { $_.Address -match $Address } else { $_.Address -like $Address } } }
+      | ?{ if($Name -eq "") { $True } else  { $_.Name -like $Name } } `
+      | ?{ if($Address -eq "") { $True } else { $_.Address -like $Address } } `
+      | ?{ if($RegexName -eq "") { $True } else  { $_.Name -match $RegexName } } `
+      | ?{ if($RegexAddress -eq "") { $True } else { $_.Address -match $RegexAddress } }
   }
 }

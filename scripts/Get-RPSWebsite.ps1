@@ -1,3 +1,11 @@
+<#
+.Synopsis
+  Get-Website
+.Parameter Server
+  Target server
+.EXAMPLE
+  Get-RPSServer test | Get-Website
+#>
 function Get-RPSWebsite{
   [CmdletBinding()]
   param (

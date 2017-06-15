@@ -1,3 +1,13 @@
+<#
+.Synopsis
+  Duplicate the web application. It also duplicates `Location` in `applicationHost.config`.
+.Parameter From
+  Specify source site name.
+.Parameter To
+  Specify destination site name.
+.EXAMPLE
+  Get-RPSServer | Copy-RPSWebsite "Default Web Site" test_site
+#>
 function Copy-RPSWebsite{
   [CmdletBinding(PositionalBinding=$true)]
   param (

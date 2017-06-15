@@ -1,3 +1,15 @@
+<#
+.Synopsis
+  Get-WebApplication
+.Parameter Server
+  Target server
+.Parameter Site
+  Target site. Standard output of Get-RPSWebsite.
+.EXAMPLE
+  Get-RPSServer test | Get-RPSWebApplication
+.EXAMPLE
+  Get-RPSServer test | Get-RPSWebSite | Get-RPSWebApplication
+#>
 function Get-RPSWebApplication{
   [CmdletBinding()]
   param (

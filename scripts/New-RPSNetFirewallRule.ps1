@@ -1,3 +1,11 @@
+<#
+.Synopsis
+  New-NetFirewallRule
+.Parameter Server
+  Target server
+.EXAMPLE
+  Get-RPSServer test | New-RPSNetFirewallRule -Name 'WindowsTime' -Protocol UDP -LocalPort 123
+#>
 function New-RPSNetFirewallRule{
   [CmdletBinding()]
   param (
